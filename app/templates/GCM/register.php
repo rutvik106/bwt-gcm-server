@@ -4,10 +4,10 @@
  * Registering a user device
  * Store reg id in users table
  */
-if (isset($_POST["name"]) && isset($_POST["email"]) && isset($_POST["regId"])) {
-    $name = $_POST["name"];
-    $email = $_POST["email"];
-    $gcm_regid = $_POST["regId"]; // GCM Registration ID
+if (isset($_GET["name"]) && isset($_GET["email"]) && isset($_GET["regId"])) {
+    $name = $_GET["name"];
+    $email = $_GET["email"];
+    $gcm_regid = $_GET["regId"]; // GCM Registration ID
     // Store user details in db
     include_once './db_functions.php';
     include_once './GCM.php';

@@ -86,7 +86,7 @@ public function checkAndStoreUser($name, $email, $gcm_regid)
 		//duplicate email found
 		//check if device is same
 		//echo "duplicate email found check if device is same";
-		$result = mysqli_query($this->db->connect(),"SELECT * FROM gcm_users WHERE gcm_regid LIKE '$gcm_regid' AND email LIKE '$email'");
+		//$result = mysqli_query($this->db->connect(),"SELECT * FROM gcm_users WHERE gcm_regid LIKE '$gcm_regid' AND email LIKE '$email'");
 		if (!$this->PDO->query("SELECT * FROM gcm_users WHERE gcm_regid LIKE '$gcm_regid' AND email LIKE '$email'")->rowCount() > 0)
 		{
 			//echo "duplicate email found but device is different add this device as new";
