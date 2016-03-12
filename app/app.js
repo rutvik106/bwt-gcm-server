@@ -1,0 +1,40 @@
+angular
+.module("bwt",['ngRoute','bwt.controllers','bwt.services'])
+.config(function($routeProvider){
+
+		$routeProvider
+		.when('/',{
+			controller:'login-controller',
+			templateUrl:'app/templates/view-login.html'
+		})
+		.when('/view-main',{
+			controller:'main-controller',
+			templateUrl:'app/templates/view-main.php',
+			resolve:{
+				"check":function(access,$location){
+					if(access.isAllowed()){
+						$location.path("/view-main");
+					}
+					else{
+						$location.path("/");
+					}
+				}
+			}
+		})
+		.when('/view-offers',{
+			controller:'offers-controller',
+			templateUrl:'app/templates/view-offers.html',
+			resolve:{
+				"check":function(access,$location){
+					if(access.isAllowed()){
+						$location.path("/view-offers");
+					}
+					else{
+						$location.path("/");
+					}
+				}
+			}
+		})
+		.otherwise({redirectTo:'/'});
+
+	});

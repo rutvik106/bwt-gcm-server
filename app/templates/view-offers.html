@@ -1,0 +1,38 @@
+<div id="view-offers">
+
+
+	<div id="header" class="jumbotron">
+		<h2 style="color:#FFF;">Manage Offers<button id="view-offers-back-button" class="glyphicon glyphicon-arrow-left" ng-click="goBack()"></button></h2>
+		<h5 style="color:#ccc;">Bhagwati Holidays search & manage offers</h5>        
+	</div>
+
+
+	<div id="offers-jumbotron" class="jumbotron" style="border-radius:0px 0px 5px 5px;">
+
+		<div id="offers-search-box" class="input-group">
+			<input ng-model="filteredOffers" type="text" class="form-control" placeholder="Search offers...">
+		</div><!-- /input-group -->
+
+		<ul>
+			<li ng-repeat="offer in offers | filter:filteredOffers | orderBy:'title'">
+
+				<label class="label" style="opacity:1; font-size:12px; margin-bottom: 8px;">Title: <span style="color:#000; font-size:12px;">{{offer.title}}</span></label>
+
+				<label class="label" style="opacity:1; font-size:12px; margin-bottom: 8px;">Description: <span style="color:#000; font-size:12px; max-height: 50px">{{offer.description}}</span></label>
+
+				<label class="label" style="opacity:1; font-size:12px; margin-bottom: 8px;">Type: <span style="color:#000; font-size:12px;">{{offer.offer_type}}</span></label>
+
+				<label class="label" style="opacity:1; font-size:12px; margin-bottom: 8px;">Validity: <span style="color:#000; font-size:12px;">{{offer.validity}}</span></label>
+
+				<label class="label" style="opacity:1; font-size:12px; margin-bottom: 8px;">Image URL: <span style="color:#000; font-size:12px;">{{offer.image_url}}</span></label>
+
+				<button id="delete-offer-button" ng-click="deleteOffer(offer.id)" class="glyphicon glyphicon-trash"></button>
+
+			</li>
+		</ul>
+
+	</div>
+
+
+
+</div>
