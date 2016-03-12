@@ -41,13 +41,13 @@ else
             <input class="component" type="text" name="image_url" placeholder="eg: http://www.example.com/image.jpg" required="required"></input>   
 
 
-            <label class="label" >Type</label> 
+            <label class="label" >Applicable on</label> 
+
             <div id="type">
 
-
-                <label class="radio-inline" style="position:static; pointer-events:auto;"><input type="radio" name="type" value="airticket"/>Airticket</label>
-                <label class="radio-inline" style="position:static; pointer-events:auto;"><input type="radio" name="type" value="visa"/>Visa</label>
-                <label class="radio-inline" style="position:static; pointer-events:auto;"><input type="radio" name="type" value="holiday" checked="checked"/>Holiday</label>
+                <label class="radio-inline" style="position:static; pointer-events:auto; padding-left:0;"><input type="checkbox" name="airticket" value="Airticket"/> Airticket</label>
+                <label class="radio-inline" style="position:static; pointer-events:auto;"><input type="checkbox" name="visa" value="Visa"/> Visa</label>
+                <label class="radio-inline" style="position:static; pointer-events:auto;"><input type="checkbox" name="holiday" value="Holiday"/> Holiday</label>
 
             </div>
 

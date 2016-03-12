@@ -1,9 +1,19 @@
 <?php
-if (isset($_GET["title"]) && isset($_GET["message"]) && isset($_GET["type"]) && isset($_GET["title"])) {
+if (isset($_GET["title"]) && isset($_GET["message"]) && isset($_GET["title"])) {
 	
-	$title=$_GET["title"];
-	
-	$type=$_GET["type"];
+	$title=$_GET["title"];	
+
+	$type="";
+
+	if(isset($_GET["airticket"])){
+		$type .=" Airticket ";
+	}
+	if(isset($_GET["visa"])){
+		$type .=" Visa ";
+	}
+	if(isset($_GET["holiday"])){
+		$type .=" Holiday ";
+	}
 	
     $message = $_GET["message"];
 
@@ -42,12 +52,12 @@ if (isset($_GET["title"]) && isset($_GET["message"]) && isset($_GET["type"]) && 
    
 	//echo print_r($registatoin_ids);
 	
-	//$push_message=array("title"=>$title,"description"=>$message,"offer_type"=>$type,"image_url"=>$imageUrl,"validity"=>$validity);
+	$push_message=array("title"=>$title,"description"=>$message,"offer_type"=>$type,"image_url"=>$imageUrl,"validity"=>$validity);
 	
-    //$data = array("push_message" => $push_message);
+    $data = array("push_message" => $push_message);
  
-    //$result = $gcm->send_notification($registatoin_ids, $data);
+    $result = $gcm->send_notification($registatoin_ids, $data);
  
-    //echo $result;
+    echo $result;
 }
 ?>
