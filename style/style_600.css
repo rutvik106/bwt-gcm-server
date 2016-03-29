@@ -267,3 +267,16 @@ label
 	float: right;
 	pointer-events:hand;
 }
+
+#offer-visiblity-button{
+	background: none;
+	background-color: #009688;
+	margin-right: 10px;
+	border: none;
+	float: right;
+    height: 25px;
+    width: 25px;
+    color: #fff;
+    border-radius: 25px;
+    padding: 0;
+}

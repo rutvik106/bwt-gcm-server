@@ -26,7 +26,13 @@
 
 				<label class="label" style="opacity:1; font-size:12px; margin-bottom: 8px;">Image URL: <span style="color:#000; font-size:12px;">{{offer.image_url}}</span></label>
 
+				
+
 				<button id="delete-offer-button" ng-click="deleteOffer(offer.id)" class="glyphicon glyphicon-trash"></button>
+
+				<button id="offer-visiblity-button" ng-click="toggleOfferVisiblity(offer.id)" ng-class="offer.visible==1?'glyphicon glyphicon-eye-open':'glyphicon glyphicon-eye-close'"></button>
+
+				
 
 			</li>
 		</ul>

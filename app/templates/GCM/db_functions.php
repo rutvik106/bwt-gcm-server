@@ -35,7 +35,7 @@
   
   
 		// insert user into database
-		$result = $this->PDO->query("INSERT INTO gcm_users(name, email, gcm_regid, created_at) VALUES('$name', '$email', '$gcm_regid', NOW())");
+		$result = $this->PDO->query("INSERT INTO gcm_users(name, email, gcm_regid, created_at, subscribed) VALUES('$name', '$email', '$gcm_regid', NOW(), 1)");
 		// check for successful store
 		if ($result) {
 			// get user details
@@ -90,7 +90,7 @@ public function checkAndStoreUser($name, $email, $gcm_regid)
 		if (!$this->PDO->query("SELECT * FROM gcm_users WHERE gcm_regid LIKE '$gcm_regid' AND email LIKE '$email'")->rowCount() > 0)
 		{
 			//echo "duplicate email found but device is different add this device as new";
-			$result = $this->PDO->query("INSERT INTO gcm_users(name, email, gcm_regid, created_at) VALUES('$name', '$email', '$gcm_regid', NOW())");
+			$result = $this->PDO->query("INSERT INTO gcm_users(name, email, gcm_regid, created_at, subscribed) VALUES('$name', '$email', '$gcm_regid', NOW(), 1)");
 			if ($result)
 			{
 				return true;
@@ -128,7 +128,7 @@ public function checkAndStoreUser($name, $email, $gcm_regid)
 	 * Getting all users
 	 */
 	public function getAllUsers() {
-		$result = $this->PDO->query("select * FROM gcm_users");
+		$result = $this->PDO->query("select * FROM gcm_users WHERE subscribed LIKE '1'");
 		return $result;
 	}
 
@@ -143,6 +143,37 @@ public function checkAndStoreUser($name, $email, $gcm_regid)
 	public function deleteOffer($id){
 		$result = $this->PDO->query("DELETE FROM offers WHERE id LIKE '$id'");
 		return $result;
+	}
+
+	public function toggleOfferVisiblity($id){
+		$result=$this->PDO->query("UPDATE offers SET visible=IF(visible=1,0,1) WHERE id LIKE '$id'");
+		return $result;
+	}
+	
+	public function unsubscribe($gcm_regid){
+		$result = $this->PDO->query("UPDATE gcm_users SET subscribed=0 WHERE gcm_regid LIKE '$gcm_regid'");
+	
+			if ($result)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}	
+	}
+	
+	public function subscribe($gcm_regid){
+		$result = $this->PDO->query("UPDATE gcm_users SET subscribed=1 WHERE gcm_regid LIKE '$gcm_regid'");
+	
+			if ($result)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}	
 	}
 
   

@@ -32,6 +32,12 @@ angular
         	});
 	};
 
+	$scope.toggleOfferVisiblity=function(id){
+			$http.get('app/templates/GCM/toggle_offer_visiblity.php?id='+id).then(function(res){
+				$scope.offers=res.data;
+			});
+	};
+
 
 
 }])

@@ -27,7 +27,8 @@ $result = $db->getAllOffers();
 												"description"=>$row["description"],
 												"image_url"=>$row["image_url"],
 												"offer_type"=>$row["offer_type"],
-												"validity"=>$row["validity"]));
+												"validity"=>$row["validity"],
+												"visible"=>$row["visible"]));
 					}
 		}
 	}

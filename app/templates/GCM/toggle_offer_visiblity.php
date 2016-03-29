@@ -7,6 +7,11 @@ $offers = array();
 
 $db = new DB_Functions();
 
+$result=$db->toggleOfferVisiblity($_GET['id']);
+
+if ($result != false)
+{
+
 $result = $db->getAllOffers();
 	
     if ($result != false)
@@ -29,6 +34,8 @@ $result = $db->getAllOffers();
 	}
 
 	echo json_encode($offers);
+
+}
 
 
 ?>

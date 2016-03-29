@@ -38,23 +38,29 @@ else
 
 
             <label class="label" >Image URL</label>    
-            <input class="component" type="text" name="image_url" placeholder="eg: http://www.example.com/image.jpg" required="required"></input>   
+            <input class="component" type="text" id="image_url" name="image_url" placeholder="eg: http://www.example.com/image.jpg" required="required"></input>   
 
 
             <label class="label" >Applicable on</label> 
 
             <div id="type">
 
-                <label class="radio-inline" style="position:static; pointer-events:auto; padding-left:0;"><input type="checkbox" name="airticket" value="Airticket"/> Airticket</label>
-                <label class="radio-inline" style="position:static; pointer-events:auto;"><input type="checkbox" name="visa" value="Visa"/> Visa</label>
-                <label class="radio-inline" style="position:static; pointer-events:auto;"><input type="checkbox" name="holiday" value="Holiday"/> Holiday</label>
+                <label class="radio-inline" style="position:static; pointer-events:auto; padding-left:0;">
+                    <input type="checkbox" id="airticket" name="airticket" value="Airticket"/> Airticket
+                </label>
+
+                <label class="radio-inline" style="position:static; pointer-events:auto;">
+                    <input type="checkbox" id="visa" name="visa" value="Visa"/> Visa
+                </label>
+
+                <label class="radio-inline" style="position:static; pointer-events:auto;">
+                    <input type="checkbox" id="holiday" name="holiday" value="Holiday"/> Holiday
+                </label>
 
             </div>
 
             <label class="label" >Validity</label>    
             <input class="component" type="text" name="validity" placeholder="eg: Limited" required="required"></input>   
-
-
             <input id="send-button" type="submit" class="my-button btn btn-primary" value="Send Push Notification" tabindex="-1" onclick=""/>
 
         </form>
@@ -72,25 +78,56 @@ No Users Registered Yet!
 
 <script type="text/javascript">
 
-function sendPushNotification(){
-    var data = $('form#msg').serialize();
-    alert(data);
-    $('form#msg').unbind('submit');                
-    $.ajax({
-        url: "app/templates/GCM/send_push_message.php",
-        type: 'GET',
-        data: data,
-        beforeSend: function() {
-
-        },
-        success: function(data, textStatus, xhr) {
-          alert(data);
-          $('.txt_message').val("");
-      },
-      error: function(xhr, textStatus, errorThrown) {
-
-      }
-  });
+function isFormValid(){
+    if(isOfferImageValid() && isOfferTypeValid()){
+        return true;
+    }
     return false;
+}
+
+function isOfferTypeValid(){
+    if($('#holiday').is(':checked') || $('#airticket').is(':checked') || $('#visa').is(':checked')){
+        return true;
+    }
+    alert("Offer type not selected, Please select one or more.");
+    return false;
+}
+
+function isOfferImageValid(){
+    var value=$("#image_url").val();
+    if(value.indexOf('.jpg') > -1 || value.indexOf('.JPG') > -1 || value.indexOf('.PNG') > -1 || value.indexOf('.png') > -1){
+        return true;
+    }
+    alert("Invalid offer image.");
+    return false;
+}
+
+function clearForm(){
+    $('form').find("input[type=text], textarea").val("");
+}
+
+function sendPushNotification(){
+    if(isFormValid())
+    {
+        var data = $('form#msg').serialize();
+        //alert(data);
+        $('form#msg').unbind('submit');                
+        $.ajax({
+            url: "app/templates/GCM/send_push_message.php",
+            type: 'GET',
+            data: data,
+            beforeSend: function() {
+
+            },
+            success: function(data, textStatus, xhr) {
+              alert("Push Notification Sent Successfully!");
+              clearForm();
+          },
+          error: function(xhr, textStatus, errorThrown) {
+
+          }
+      });
+        return false;
+    }
 }
 </script>
